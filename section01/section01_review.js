@@ -6,6 +6,7 @@
 
 const library = [];
 
+// 기능 1. 책 추가하기
 function addBook(title, author, publisher) {
     const exists = library.find(
         (book) => {
@@ -17,7 +18,7 @@ function addBook(title, author, publisher) {
         console.log(`${title} 은 이미 추가되어있는 책입니다.`);
         return;
     };
-
+    
     const book = {
         title: title,
         author: author,
@@ -30,6 +31,7 @@ addBook("채식주의자", "한강", "창비");
 addBook("데미안", "헤르만 헤세", "민음사");
 console.log(library);
 
+// 기능 2. 책 목록보기
 function listBooks() {
     library.forEach((book, index) => {
         console.log(book);
@@ -38,6 +40,7 @@ function listBooks() {
 
 listBooks();
 
+// 기능 3. 책 검색하기
 function searchBook(word) {
     const exists = library.filter(
         (book) => {
@@ -56,6 +59,7 @@ function searchBook(word) {
 
 searchBook("창비");
 
+// 기능 4. 책 삭제하기
 function deleteBook(title, author) {
     const index = library.findIndex(
         (book) => {
