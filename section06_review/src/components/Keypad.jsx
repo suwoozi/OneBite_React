@@ -26,63 +26,41 @@ const Keypad = ({
   };
 
   const calculate = () => {
-    let number = "";
     let result = 0;
     let operator = "";
 
-    for (const char of currentInput) {
-        console.log("---char", char, "---number", number, "---result", result)
-      if (!isNaN(char)) {
-        number += char;
-      } else {
-        operator = char;
-        if (result === 0) {
-          result = Number(number);
-          number = "";
-        } else {
-          switch (char) {
-            case "+":
-                console.log("+++++")
-              result += Number(number);
-              number = "";
-              break;
-            case "-":
-              result -= Number(number);
-              number = "";
-              break;
-            case "*":
-              result *= Number(number);
-              number = "";
-              break;
-            case "/":
-              result /= Number(number);
-              number = "";
-              break;
-          }
-        }
-      }
-    }
-    console.log("--number", number);
-    console.log("--result", result);
-    if (number !== "") {
-      switch (operator) {
-        case "+":
-          result += Number(number);
-          break;
-        case "-":
-          result -= Number(number);
-          break;
-        case "*":
-          result *= Number(number);
-          break;
-        case "/":
-          result /= Number(number);
-          break;
-      }
-    }
+    const tokens = currentInput.match(/\d+|\+|-|\*|\//g);
 
-    console.log("--number", number);
-    console.log("--result", result);
+    for (const char of tokens) {
+      if (isNaN(char)) {
+
+        operator = char;
+
+      } else if (operator) {
+
+        switch (operator) {
+          case "+":
+            result += Number(char);
+            operator = "";
+            break;
+          case "-":
+            result -= Number(char);
+            operator = "";
+            break;
+          case "*":
+            result *= Number(char);
+            operator = "";
+            break;
+          case "/":
+            result /= Number(char);
+            operator = "";
+            break;
+        }
+      } else {
+        console.log("--result += char", result, char);
+        result += Number(char);
+      }
+    }
   };
 
   return (
