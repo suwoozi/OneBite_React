@@ -26,6 +26,8 @@ const Keypad = ({
   };
 
   const calculate = () => {
+    setExpression(currentInput);
+    
     let result = 0;
     let operator = "";
 
@@ -57,10 +59,11 @@ const Keypad = ({
             break;
         }
       } else {
-        console.log("--result += char", result, char);
         result += Number(char);
       }
     }
+
+    setCurrentInput(result);
   };
 
   return (
